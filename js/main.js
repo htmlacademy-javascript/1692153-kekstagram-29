@@ -1,4 +1,4 @@
 import {getPicturesData} from './data.js';
-const data = getPicturesData(20);
-window.console.log(data);
+import {renderPictures} from'./pictures.js';
+renderPictures(getPicturesData(25));
 
