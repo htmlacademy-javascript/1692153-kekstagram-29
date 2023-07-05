@@ -35,7 +35,7 @@ const getComment = () => ({
 
 const getPicture = (index) => ({
   id: index,
-  url: `photo/${index}.jpg`,
+  url: `photos/${index}.jpg`,
   description: DESCRIPTIONS[getRandomNumberFromRange(0, DESCRIPTIONS.length)],
   likes: getRandomNumberFromRange(15, 200),
   comments: Array.from({length: getRandomNumberFromRange(0, 20)}, getComment)
