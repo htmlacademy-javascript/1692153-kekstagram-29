@@ -3,8 +3,9 @@ const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
 
-const fillCardTemplate = ({url, description, likes, comments}) => {
+const fillCardTemplate = ({id, url, description, likes, comments}) => {
   const picture = pictureTemplate.cloneNode(true);
+  picture.dataset.id = id;
   picture.querySelector('.picture__img').src = url;
   picture.querySelector('.picture__img').alt = description;
   picture.querySelector('.picture__likes').textContent = likes;
