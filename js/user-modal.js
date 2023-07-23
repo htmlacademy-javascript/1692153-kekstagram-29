@@ -57,7 +57,7 @@ function createComment({avatar, name, message}) {
         alt="${name}"
         width="35" height="35">
     <p class="social__text">${message}</p>
-</li>`;
+ </li>`;
 }
 
 const renderCommentsList = (comments) => {
