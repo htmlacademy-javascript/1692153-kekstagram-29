@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import {data} from './data.js';
+import {data} from './load.js';
 import {isEscapeKey} from './util.js';
 
 const fullPicture = document.querySelector('.big-picture');

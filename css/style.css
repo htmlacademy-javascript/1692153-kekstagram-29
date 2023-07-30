@@ -1413,3 +1413,16 @@ main {
   background-color: rgb(229, 39, 5);
   color: #ffe753;
 }
+
+.error-alert {
+  z-index: 99;
+  position: absolute;
+  color: black;
+  left: 0;
+  top: 0;
+  right: 0;
+  padding: 10px 3px;
+  font-size: 30px;
+  text-align: center;
+  background-color: #e82525;
+}
