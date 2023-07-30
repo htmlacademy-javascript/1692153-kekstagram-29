@@ -18,6 +18,7 @@ export const renderPictures = (data) => {
     fragment.appendChild(fillCardTemplate(card));
   });
   picturesContainer.appendChild(fragment);
+
 };
 
 
