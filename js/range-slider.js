@@ -56,8 +56,32 @@ const rangeContainer = document.querySelector('.effect-level');
 const rangeSlider = document.querySelector('.effect-level__slider');
 const rangeInput = document.querySelector('.effect-level__value');
 const effects = document.querySelector('.effects');
+const reducePictureElement = document.querySelector('.scale__control--smaller');
+const increasePictureElement = document.querySelector('.scale__control--bigger');
+const valueScale = document.querySelector('.scale__control--value');
 const imagePreview = document.querySelector('.img-upload__preview img');
 
+reducePictureElement.addEventListener('click', () => {
+  const value = parseInt(valueScale.value, 10);
+  if (value > 25) {
+    valueScale.value = `${value - 25}%`;
+    imagePreview.style.cssText += `transform: scale(${parseInt(valueScale.value, 10) / 100})`;
+  }
+});
+
+increasePictureElement.addEventListener('click', () => {
+  const value = parseInt(valueScale.value, 10);
+  if (value < 100) {
+    valueScale.value = `${value + 25}%`;
+    imagePreview.style.cssText += `transform: scale(${parseInt(valueScale.value, 10) / 100})`;
+  }
+});
+
+export const resetDefault = () => {
+  rangeContainer.classList.add('hidden');
+  // valueScale.value = '100%';
+  imagePreview.style.cssText = 'transform: scale(1); filter: none';
+};
 
 function hideRangeSlider () {
   rangeContainer.classList.add('hidden');
