@@ -1,3 +1,5 @@
+import {debounce} from './util.js';
+
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
@@ -13,12 +15,20 @@ const fillCardTemplate = ({id, url, description, likes, comments}) => {
   return picture;
 };
 
+function resetPhotos() {
+  const pictures = picturesContainer.querySelectorAll('.picture');
+  pictures.forEach((picture)=> {
+    picture.remove();
+  });
+}
+
 export const renderPictures = (data) => {
+  resetPhotos();
   data.forEach((card) => {
     fragment.appendChild(fillCardTemplate(card));
   });
   picturesContainer.appendChild(fragment);
-
 };
 
+export const renderPicturesWithDebounce = debounce(renderPictures);
 

@@ -1,6 +1,6 @@
 import {getData} from './api.js';
 import {showAlertError} from './util.js';
-import {renderPictures } from './pictures.js';
+import {renderPictures} from './pictures.js';
 
 let data = null;
 
