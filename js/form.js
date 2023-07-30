@@ -1,6 +1,7 @@
 import {isEscapeKey} from './util.js';
 import {sendData} from './api.js';
 import {showMessage} from './message.js';
+import {resetDefault} from './range-slider.js';
 
 const MAX_HASHTAG_COUNT = 5;
 const VALID_SYMBOLS = /^#[a-zа-яё0-9]{1,19}$/i;
@@ -33,6 +34,7 @@ const closeModal = () => {
   uploadOverlay.classList.add('hidden');
 
   uploadInput.value = '';
+  resetDefault();
 
   document.removeEventListener('keydown', onDocumentKeydown);
   textHashtags.removeEventListener('keydown', onFormFieldKeydown);
