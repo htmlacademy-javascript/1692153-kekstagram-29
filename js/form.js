@@ -37,9 +37,6 @@ const closeModal = () => {
   resetDefault();
 
   document.removeEventListener('keydown', onDocumentKeydown);
-  textHashtags.removeEventListener('keydown', onFormFieldKeydown);
-  textDescription.removeEventListener('keydown', onFormFieldKeydown);
-
 };
 
 const openModal = () => {
@@ -48,18 +45,16 @@ const openModal = () => {
 
   uploadCancel.addEventListener('click', closeModal);
   document.addEventListener('keydown', onDocumentKeydown);
-  textHashtags.addEventListener('keydown', onFormFieldKeydown);
-  textDescription.addEventListener('keydown', onFormFieldKeydown);
 };
 
 
-function blockUploadSubmit() {
+const blockUploadSubmit = () => {
   uploadSubmit.disabled = true;
-}
+};
 
-function unblockUploadSubmit() {
+const unblockUploadSubmit = () => {
   uploadSubmit.disabled = false;
-}
+};
 
 const normalizeTags = (tagString) => tagString.trim().split(' ').filter((tag) => Boolean(tag.length));
 const hasValidTags = (value) => normalizeTags(value).every((tag) => VALID_SYMBOLS.test(tag));
@@ -69,31 +64,14 @@ const hasUniqueTags = (value) => {
   return lowerCaseTags.length === new Set(lowerCaseTags).size;
 };
 
+const cancelCloseModal = () => document.activeElement === textHashtags || document.activeElement === textDescription;
 
-function onFormFieldKeydown (evt) {
-  if (isEscapeKey(evt)) {
+export function onDocumentKeydown (evt) {
+  if (isEscapeKey(evt) && !cancelCloseModal()) {
     evt.preventDefault();
     closeModal();
   }
 }
-
-function onDocumentKeydown (evt) {
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
-}
-
-textHashtags.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
-});
-
-textDescription.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.stopPropagation();
-  }
-});
 
 const uploadFormData = async () => {
   try {
@@ -102,10 +80,11 @@ const uploadFormData = async () => {
     await sendData(formData);
     unblockUploadSubmit();
     showMessage('success');
-    closeModal ();
+    closeModal();
   } catch {
     unblockUploadSubmit();
     showMessage('error');
+    document.removeEventListener('keydown', onDocumentKeydown);
   }
 };
 

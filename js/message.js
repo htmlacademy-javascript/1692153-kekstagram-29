@@ -14,9 +14,14 @@ function renderMessage() {
   popupContainer.insertAdjacentElement('afterbegin', successMessage);
 }
 
+const messageDelete = (cls) => {
+  const booklet = bodyElement.querySelector(`.${cls}`);
+  booklet.remove();
+};
+
 renderMessage();
 
-function showMessage(cls) {
+export function showMessage(cls) {
   const message = bodyElement.querySelector(`.${cls}`);
   const closeButton = message.querySelector(`.${cls}__button`);
   message.classList.remove('hidden');
@@ -36,12 +41,10 @@ function showMessage(cls) {
   closeButton.addEventListener('click', onCloseButtonClick);
 
   function closePopup () {
-    bodyElement.querySelector(`.${cls}`).classList.add('hidden');
-
+    messageDelete (cls);
     document.removeEventListener('keydown', onDocumentKeydown);
     closeButton.removeEventListener('click', onCloseButtonClick);
+    // message.removeEventListener('click',onScreenAreaClick);
   }
 }
-
-export {showMessage};
 

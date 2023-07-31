@@ -79,7 +79,7 @@ increasePictureElement.addEventListener('click', () => {
 
 export const resetDefault = () => {
   rangeContainer.classList.add('hidden');
-  // valueScale.value = '100%';
+  valueScale.value = '100%';
   imagePreview.style.cssText = 'transform: scale(1); filter: none';
 };
 
