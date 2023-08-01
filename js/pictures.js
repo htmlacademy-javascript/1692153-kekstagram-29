@@ -1,12 +1,12 @@
 import {debounce} from './util.js';
 
-const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-const picturesContainer = document.querySelector('.pictures');
+const pictureTemplateElement = document.querySelector('#picture').content.querySelector('.picture');
+const picturesContainerElement = document.querySelector('.pictures');
 const fragment = document.createDocumentFragment();
 
 
 const fillCardTemplate = ({id, url, description, likes, comments}) => {
-  const picture = pictureTemplate.cloneNode(true);
+  const picture = pictureTemplateElement.cloneNode(true);
   picture.dataset.id = id;
   picture.querySelector('.picture__img').src = url;
   picture.querySelector('.picture__img').alt = description;
@@ -15,19 +15,19 @@ const fillCardTemplate = ({id, url, description, likes, comments}) => {
   return picture;
 };
 
-function resetPhotos() {
-  const pictures = picturesContainer.querySelectorAll('.picture');
+const resetPhotos = () => {
+  const pictures = picturesContainerElement.querySelectorAll('.picture');
   pictures.forEach((picture)=> {
     picture.remove();
   });
-}
+};
 
 export const renderPictures = (data) => {
   resetPhotos();
   data.forEach((card) => {
     fragment.appendChild(fillCardTemplate(card));
   });
-  picturesContainer.appendChild(fragment);
+  picturesContainerElement.appendChild(fragment);
 };
 
 export const renderPicturesWithDebounce = debounce(renderPictures);
