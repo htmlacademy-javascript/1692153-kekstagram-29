@@ -52,50 +52,50 @@ const EFFECTS = [
 const DEFAULT_EFFECT = EFFECTS[0];
 let currentEffect = DEFAULT_EFFECT;
 
-const rangeContainer = document.querySelector('.effect-level');
-const rangeSlider = document.querySelector('.effect-level__slider');
-const rangeInput = document.querySelector('.effect-level__value');
-const effects = document.querySelector('.effects');
+const rangeContainerElement = document.querySelector('.effect-level');
+const rangeSliderElement = document.querySelector('.effect-level__slider');
+const rangeInputElement = document.querySelector('.effect-level__value');
+const effectsElement = document.querySelector('.effects');
 const reducePictureElement = document.querySelector('.scale__control--smaller');
 const increasePictureElement = document.querySelector('.scale__control--bigger');
-const valueScale = document.querySelector('.scale__control--value');
-const imagePreview = document.querySelector('.img-upload__preview img');
+const valueScaleElement = document.querySelector('.scale__control--value');
+const imagePreviewElement = document.querySelector('.img-upload__preview img');
 
 reducePictureElement.addEventListener('click', () => {
-  const value = parseInt(valueScale.value, 10);
+  const value = parseInt(valueScaleElement.value, 10);
   if (value > 25) {
-    valueScale.value = `${value - 25}%`;
-    imagePreview.style.cssText += `transform: scale(${parseInt(valueScale.value, 10) / 100})`;
+    valueScaleElement.value = `${value - 25}%`;
+    imagePreviewElement.style.cssText += `transform: scale(${parseInt(valueScaleElement.value, 10) / 100})`;
   }
 });
 
 increasePictureElement.addEventListener('click', () => {
-  const value = parseInt(valueScale.value, 10);
+  const value = parseInt(valueScaleElement.value, 10);
   if (value < 100) {
-    valueScale.value = `${value + 25}%`;
-    imagePreview.style.cssText += `transform: scale(${parseInt(valueScale.value, 10) / 100})`;
+    valueScaleElement.value = `${value + 25}%`;
+    imagePreviewElement.style.cssText += `transform: scale(${parseInt(valueScaleElement.value, 10) / 100})`;
   }
 });
 
 export const resetDefault = () => {
-  rangeContainer.classList.add('hidden');
-  valueScale.value = '100%';
-  imagePreview.style.cssText = 'transform: scale(1); filter: none';
+  rangeContainerElement.classList.add('hidden');
+  valueScaleElement.value = '100%';
+  imagePreviewElement.style.cssText = 'transform: scale(1); filter: none';
 };
 
-function hideRangeSlider () {
-  rangeContainer.classList.add('hidden');
-}
+const hideRangeSlider = () => {
+  rangeContainerElement.classList.add('hidden');
+};
 
 hideRangeSlider ();
 
-function showRangeSlider () {
-  rangeContainer.classList.remove('hidden');
-}
+const showRangeSlider = () => {
+  rangeContainerElement.classList.remove('hidden');
+};
 
 
-function updateSlider () {
-  rangeSlider.noUiSlider.updateOptions({
+const updateSlider = () => {
+  rangeSliderElement.noUiSlider.updateOptions({
     range: {
       min: currentEffect.min,
       max: currentEffect.max,
@@ -103,12 +103,12 @@ function updateSlider () {
     step: currentEffect.step,
     start: currentEffect.max
   });
-}
+};
 
-function onEffectsClick(evt) {
+const onEffectsClick = (evt) => {
   if (evt.target.classList.contains('effects__radio')) {
     currentEffect = EFFECTS.find((effect) =>effect.name === evt.target.value);
-    imagePreview.className = `img-upload__preview effects__preview--${currentEffect.name}`;
+    imagePreviewElement.className = `img-upload__preview effects__preview--${currentEffect.name}`;
 
     updateSlider ();
 
@@ -118,19 +118,19 @@ function onEffectsClick(evt) {
       showRangeSlider();
     }
   }
-}
+};
 
-function onRangeSliderUpdate () {
-  const rangesSliderValue = rangeSlider.noUiSlider.get();
-  rangeInput.value = rangesSliderValue;
-  imagePreview.style.filter = `${currentEffect.style}(${rangesSliderValue}${currentEffect.unit})`;
+const onRangeSliderUpdate = () => {
+  const rangesSliderValue = rangeSliderElement.noUiSlider.get();
+  rangeInputElement.value = rangesSliderValue;
+  imagePreviewElement.style.filter = `${currentEffect.style}(${rangesSliderValue}${currentEffect.unit})`;
 
   if (currentEffect.name === 'none') {
-    imagePreview.style.filter = DEFAULT_EFFECT.style;
+    imagePreviewElement.style.filter = DEFAULT_EFFECT.style;
   }
-}
+};
 
-noUiSlider.create(rangeSlider, {
+noUiSlider.create(rangeSliderElement, {
   range: {
     min: DEFAULT_EFFECT.min,
     max: DEFAULT_EFFECT.max,
@@ -139,5 +139,5 @@ noUiSlider.create(rangeSlider, {
   start: DEFAULT_EFFECT.min
 });
 
-effects.addEventListener ('click', onEffectsClick);
-rangeSlider.noUiSlider.on('update', onRangeSliderUpdate);
+effectsElement.addEventListener ('click', onEffectsClick);
+rangeSliderElement.noUiSlider.on('update', onRangeSliderUpdate);

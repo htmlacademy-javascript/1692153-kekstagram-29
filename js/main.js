@@ -5,4 +5,3 @@ import './load.js';
 import './message.js';
 import './picture-filter.js';
 import './user-picture.js';
-

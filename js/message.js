@@ -1,18 +1,19 @@
+/* eslint-disable no-use-before-define */
 import {isEscapeKey} from './util.js';
 
-const errorMessage = document.querySelector('#error').content.querySelector('.error');
-const successMessage = document.querySelector('#success').content.querySelector('.success');
+const errorMessageElement = document.querySelector('#error').content.querySelector('.error');
+const successMessageElement = document.querySelector('#success').content.querySelector('.success');
 const bodyElement = document.querySelector('body');
 
-function renderMessage() {
+const renderMessage = () => {
   const popupContainer = document.querySelector('main');
 
-  errorMessage.classList.add('hidden');
-  successMessage.classList.add('hidden');
+  errorMessageElement.classList.add('hidden');
+  successMessageElement.classList.add('hidden');
 
-  popupContainer.insertAdjacentElement('afterbegin', errorMessage);
-  popupContainer.insertAdjacentElement('afterbegin', successMessage);
-}
+  popupContainer.insertAdjacentElement('afterbegin', errorMessageElement);
+  popupContainer.insertAdjacentElement('afterbegin', successMessageElement);
+};
 
 const messageDelete = (cls) => {
   const booklet = bodyElement.querySelector(`.${cls}`);
@@ -21,10 +22,10 @@ const messageDelete = (cls) => {
 
 renderMessage();
 
-export function showMessage(cls) {
-  const message = bodyElement.querySelector(`.${cls}`);
-  const closeButton = message.querySelector(`.${cls}__button`);
-  message.classList.remove('hidden');
+export const showMessage = (cls) => {
+  const messageElement = bodyElement.querySelector(`.${cls}`);
+  const closeButtonElement = messageElement.querySelector(`.${cls}__button`);
+  messageElement.classList.remove('hidden');
 
   const onDocumentKeydown = (evt) => {
     if (isEscapeKey(evt)) {
@@ -38,13 +39,12 @@ export function showMessage(cls) {
   };
 
   document.addEventListener('keydown', onDocumentKeydown);
-  closeButton.addEventListener('click', onCloseButtonClick);
+  closeButtonElement.addEventListener('click', onCloseButtonClick);
 
-  function closePopup () {
+  const closePopup = () => {
     messageDelete (cls);
     document.removeEventListener('keydown', onDocumentKeydown);
-    closeButton.removeEventListener('click', onCloseButtonClick);
-    // message.removeEventListener('click',onScreenAreaClick);
-  }
-}
+    closeButtonElement.removeEventListener('click', onCloseButtonClick);
+  };
+};
 
