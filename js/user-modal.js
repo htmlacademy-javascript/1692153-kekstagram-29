@@ -4,7 +4,7 @@ import {isEscapeKey} from './util.js';
 
 const fullPictureElement = document.querySelector('.big-picture');
 const fullPictureModalElement = document.querySelector('.big-picture');
-const picturesContainer = document.querySelector('.pictures');
+const picturesContainerElement = document.querySelector('.pictures');
 const pictureCancelElement = fullPictureModalElement.querySelector('.big-picture__cancel');
 const commentsCounterElement = fullPictureElement.querySelector('.social__comment-count');
 const commentsLoaderElement = fullPictureElement.querySelector('.comments-loader');
@@ -98,4 +98,4 @@ const fillBigPicture = ({url, likes, comments, description}) => {
   renderCommentsCounter(initialComments.length, comments.length);
 };
 
-picturesContainer.addEventListener('click', onPicturesContainerClick);
+picturesContainerElement.addEventListener('click', onPicturesContainerClick);

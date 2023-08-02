@@ -6,13 +6,13 @@ const fragment = document.createDocumentFragment();
 
 
 const fillCardTemplate = ({id, url, description, likes, comments}) => {
-  const picture = pictureTemplateElement.cloneNode(true);
-  picture.dataset.id = id;
-  picture.querySelector('.picture__img').src = url;
-  picture.querySelector('.picture__img').alt = description;
-  picture.querySelector('.picture__likes').textContent = likes;
-  picture.querySelector('.picture__comments').textContent = comments.length;
-  return picture;
+  const pictureElement = pictureTemplateElement.cloneNode(true);
+  pictureElement.dataset.id = id;
+  pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.querySelector('.picture__img').alt = description;
+  pictureElement.querySelector('.picture__likes').textContent = likes;
+  pictureElement.querySelector('.picture__comments').textContent = comments.length;
+  return pictureElement;
 };
 
 const resetPhotos = () => {
